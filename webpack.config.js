@@ -6,7 +6,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
-    clean: true
+    clean: true,
+    publicPath: "/"
   },
   module: {
     rules: [
@@ -14,6 +15,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: "babel-loader"
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       }
     ]
   },
@@ -27,7 +32,10 @@ module.exports = {
   ],
   devServer: {
     static: "./dist",
-    port: 3001
+    port: 3001,
+    hot: true,
+    open: true,
+    historyApiFallback: true
   },
   mode: "development"
 };
